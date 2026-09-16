@@ -1,0 +1,42 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-panel {
+  min-width: 30vw;
+  max-height: 90vw;
+  overflow: auto; /*内容多了自动出现滚动条*/
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  padding: 16px 16px 24px 16px;
+  border-radius: 4px;
+}
+
+.alert {
+  color: red;
+  margin: 0px 0px 8px 0px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* .field {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+} */
+
+button {
+  align-self: flex-end;
+}

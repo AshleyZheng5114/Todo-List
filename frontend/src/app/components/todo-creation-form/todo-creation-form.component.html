@@ -1,0 +1,31 @@
+<div class="modal-backdrop" (click)="closeModal(false)">
+  <div class="modal-panel" (click)="$event.stopPropagation()">
+    <div class="modal-content">
+      <h3>{{ isEdit() ? 'Edit your todo item here:' : 'Create a new todo item here:' }}</h3>
+      <h3>{{ oldTodo()?.itemName }}</h3>
+      <form [formGroup]="todoForm" (ngSubmit)="isEdit() ? editTodo() : createTodo()">
+        <div class="field">
+          <label for="itemName">Item name: </label>
+          <input type="text" id="itemName" formControlName="itemName" />
+          @if (todoForm.controls.itemName.touched && todoForm.controls.itemName.invalid) {
+            <p class="alert">Item name is required!</p>
+          }
+        </div>
+
+        <div class="field">
+          <label for="targetDueDate">Target due date: </label>
+          <input type="date" id="targetDueDate" formControlName="targetDueDate" />
+        </div>
+        <div class="field">
+          <label for="completed">Have you completed: </label>
+          <input type="checkbox" id="completed" formControlName="completed" />
+        </div>
+        @if (isEdit()) {
+          <button [disabled]="todoForm.invalid">Edit</button>
+        } @else {
+          <button [disabled]="todoForm.invalid">Create</button>
+        }
+      </form>
+    </div>
+  </div>
+</div>
