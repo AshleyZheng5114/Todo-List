@@ -9,35 +9,37 @@
   ></app-todo-creation-form>
 }
 
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Due Date</th>
-      <th>Completed?</th>
-      <th>Edit</th>
-      <th>Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (todoItem of todoList(); track todoItem.id) {
+@if (todoList().length > 0) {
+  <table>
+    <thead>
       <tr>
-        <td>{{ todoItem.itemName }}</td>
-        <td>{{ todoItem.targetDueDate | date }}</td>
-        <td>
-          @if (!todoItem.completed) {
-            <button (click)="markAsCompleted(todoItem.id!)" [disabled]="todoItem.completed">
-              Mark as Completed
-            </button>
-          } @else {
-            <span>Completed</span>
-          }
-        </td>
-
-        <td><button (click)="openModal(true, todoItem)">Edit</button></td>
-        <td><button (click)="deleteTodoItem(todoItem.id!)">Delete</button></td>
+        <th>Item</th>
+        <th>Due Date</th>
+        <th>Completed?</th>
+        <th>Edit</th>
+        <th>Delete</th>
       </tr>
-      <p></p>
-    }
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      @for (todoItem of todoList(); track todoItem.id) {
+        <tr>
+          <td>{{ todoItem.itemName }}</td>
+          <td>{{ todoItem.targetDueDate | date }}</td>
+          <td>
+            @if (!todoItem.completed) {
+              <button (click)="markAsCompleted(todoItem.id!)" [disabled]="todoItem.completed">
+                Mark as Completed
+              </button>
+            } @else {
+              <span>Completed</span>
+            }
+          </td>
+
+          <td><button (click)="openModal(true, todoItem)">Edit</button></td>
+          <td><button (click)="deleteTodoItem(todoItem.id!)">Delete</button></td>
+        </tr>
+        <p></p>
+      }
+    </tbody>
+  </table>
+}

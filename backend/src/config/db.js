@@ -1,8 +1,10 @@
+require("dotenv").config();
+
 const mongoose = require("mongoose");
 
 async function connectDB() {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/todoapp");
+    await mongoose.connect(process.env.MONGO_URI);
     console.log("MongoDB connects successfully!");
   } catch (error) {
     console.error("MongoDB connects failed!", error.message);
