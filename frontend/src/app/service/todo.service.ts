@@ -14,7 +14,8 @@ export interface TodoItem {
 })
 export class TodoService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:3000/api/todo';
+  // private baseUrl = 'http://localhost:3000/api/todo';
+  private baseUrl = 'http://13.58.182.116:3000/api/todo';
 
   getTodoList(): Observable<TodoItem[]> {
     return this.http
