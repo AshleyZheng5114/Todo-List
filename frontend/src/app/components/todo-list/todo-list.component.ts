@@ -2,10 +2,11 @@ import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core
 import { TodoItem, TodoService } from '../../service/todo.service';
 import { DatePipe } from '@angular/common';
 import { TodoCreationFormComponent } from '../todo-creation-form/todo-creation-form.component';
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-todo-list',
-  imports: [DatePipe, TodoCreationFormComponent],
+  imports: [DatePipe, TodoCreationFormComponent, CdkDropList, CdkDrag],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css',
 })
@@ -47,8 +48,6 @@ export class TodoListComponent implements OnInit {
     }
   }
 
-  modifyTodoItem() {}
-
   markAsCompleted(id: string) {
     this.todoService.markAsCompleted(id).subscribe({
       next: (res) => {
@@ -64,5 +63,13 @@ export class TodoListComponent implements OnInit {
         this.getAllTodo();
       },
     });
+  }
+
+  drop(event: CdkDragDrop<TodoItem[]>) {
+    const currentList = [...this.todoList()];
+    moveItemInArray(currentList, event.previousIndex, event.currentIndex);
+    this.todoList.set(currentList);
+
+    // todo: backend API
   }
 }

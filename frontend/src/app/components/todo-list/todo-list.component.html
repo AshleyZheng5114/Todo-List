@@ -13,6 +13,7 @@
   <table>
     <thead>
       <tr>
+        <th></th>
         <th>Item</th>
         <th>Due Date</th>
         <th>Completed?</th>
@@ -20,9 +21,10 @@
         <th>Delete</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody cdkDropList (cdkDropListDropped)="drop($event)">
       @for (todoItem of todoList(); track todoItem.id) {
-        <tr>
+        <tr cdkDrag [cdkDragData]="todoItem">
+          <td class="drag-handle" cdkDragHandle>⠿</td>
           <td>{{ todoItem.itemName }}</td>
           <td>{{ todoItem.targetDueDate | date }}</td>
           <td>
